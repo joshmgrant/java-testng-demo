@@ -9,35 +9,20 @@ public class LoginPage extends BasePage {
     }
 
     public void enterCredentials(String email, String password){
-        this.shortSleep();
-        driver.findElement(By.id("session_email")).sendKeys(email);
-        driver.findElement(By.id("session_password")).sendKeys(password);
+        this.waitToSendKeys(By.id("session_email"), email);
+        this.waitToSendKeys(By.id("session_password"), password);
     }
 
     public void submitCredentials() {
-        this.shortSleep();
-        driver.findElement(By.cssSelector("[data-test='submit']")).click();
+        this.waitToClick(By.cssSelector("[data-test='submit']"));
     }
 
     public String getInvalidLoginMessage() {
-        try {
-            return driver.findElement(By.cssSelector("[data-test='notice']")).getText();
-        } catch (NoSuchElementException e) {
-            return "";
-        } catch (ElementNotVisibleException e) {
-            return "";
-        }
-
+        return this.getText(By.cssSelector("[data-test='notice']"));
     }
 
     public boolean isSignOutControlDisplayed(){
-        try {
-            return driver.findElement(By.cssSelector("[data-test='sign-out']")).isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        } catch (ElementNotVisibleException e) {
-            return false;
-        }
+        return this.isDisplayed(By.cssSelector("[data-test='sign-out']"));
     }
 
     public void loginAs(String email, String password) {
