@@ -18,9 +18,7 @@ public class InvalidLoginTest extends TestBase {
     public void blankCredentials() {
         loginPage = new LoginPage(driver);
 
-        loginPage.clickSignInButton();
-        loginPage.enterCredentials("", "");
-        loginPage.submitCredentials();
+        loginPage.loginAs("", "");
 
         String expected = "Bad email or password.";
         String actual = loginPage.getInvalidLoginMessage();

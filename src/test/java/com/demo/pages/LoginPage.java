@@ -39,4 +39,10 @@ public class LoginPage extends BasePage {
             return false;
         }
     }
+
+    public void loginAs(String email, String password) {
+        this.clickSignInButton();
+        this.enterCredentials(email, password);
+        this.submitCredentials();
+    }
 }

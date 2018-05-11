@@ -19,9 +19,7 @@ public class ValidLoginTest extends TestBase {
     public void validUser() {
         loginPage = new LoginPage(driver);
 
-        loginPage.clickSignInButton();
-        loginPage.enterCredentials("jgrant@saucelabs.com", "sauce");
-        loginPage.submitCredentials();
+        loginPage.loginAs("jgrant@saucelabs.com", "sauce");
 
         Assert.assertTrue(loginPage.isSignOutControlDisplayed());
     }
