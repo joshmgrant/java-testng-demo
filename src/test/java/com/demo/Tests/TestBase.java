@@ -1,24 +1,32 @@
 package com.demo.Tests;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import java.lang.reflect.Method;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDateTime;
+
 
 public abstract class TestBase {
 
     WebDriver driver;
 
     @BeforeMethod
-    public void setUp() throws MalformedURLException {
+    public void setUp(Method method) throws MalformedURLException {
+
         DesiredCapabilities caps = DesiredCapabilities.chrome();
         caps.setCapability("platform", "Windows 10");
         caps.setCapability("version", "65.0");
         caps.setCapability("seleniumVersion", "3.1.0");
+        caps.setCapability("name", method.getName());
+        caps.setCapability("build", "AddressBook-" + LocalDateTime.now());
 
         String sauce_username = System.getenv("SAUCE_USERNAME");
         String sauce_access_key = System.getenv("SAUCE_ACCESS_KEY");
@@ -32,7 +40,8 @@ public abstract class TestBase {
     }
 
     @AfterMethod
-    public void tearDown() {
+    public void tearDown(ITestResult result) {
+        ((JavascriptExecutor) driver).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
         driver.quit();
     }
 }
