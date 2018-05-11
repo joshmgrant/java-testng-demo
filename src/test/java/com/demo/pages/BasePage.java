@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class BasePage {
 
     protected WebDriver driver;
+    protected By signInLocator = By.id("sign-in");
 
     public BasePage(WebDriver driver){
         this.driver = driver;
@@ -20,7 +21,7 @@ public class BasePage {
     }
 
     public void clickSignInButton() {
-        this.driver.findElement(By.id("sign-in")).click();
+        this.driver.findElement(this.signInLocator).click();
         this.shortSleep();
     }
 }
