@@ -10,8 +10,8 @@ public class LoginPage extends BasePage {
 
     public void enterCredentials(String email, String password){
         this.shortSleep();
-        driver.findElement(By.xpath("//*[@id='session_email']")).sendKeys(email);
-        driver.findElement(By.xpath("//*[@id='session_password']")).sendKeys(password);
+        driver.findElement(By.id("session_email")).sendKeys(email);
+        driver.findElement(By.id("session_password")).sendKeys(password);
     }
 
     public void submitCredentials() {
