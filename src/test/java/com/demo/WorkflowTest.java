@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 // valid user: jgrant@saucelabs.com, sauce
 
-public class LoginTest {
+public class WorkflowTest {
 
     protected WebDriver driver;
 
