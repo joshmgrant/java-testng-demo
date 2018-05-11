@@ -1,5 +1,6 @@
 package com.demo.Tests;
 
+import com.demo.pages.LoginPage;
 import org.testng.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,17 +13,17 @@ import java.net.URL;
 
 public class ValidLoginTest extends TestBase {
 
+    LoginPage loginPage;
+
     @Test
-    public void validUser() throws InterruptedException {
-            driver.findElement(By.id("sign-in")).click();
+    public void validUser() {
+        loginPage = new LoginPage(driver);
 
-            Thread.sleep(2000);
+        loginPage.clickSignInButton();
+        loginPage.enterCredentials("jgrant@saucelabs.com", "sauce");
+        loginPage.submitCredentials();
 
-            driver.findElement(By.xpath("//*[@id='session_email']")).sendKeys("jgrant@saucelabs.com");
-            driver.findElement(By.xpath("//*[@id='session_password']")).sendKeys("sauce");
-            driver.findElement(By.cssSelector("[data-test='submit']")).click();
-
-            Assert.assertTrue(driver.findElement(By.cssSelector("[data-test='sign-out']")).isDisplayed());
+        Assert.assertTrue(loginPage.isSignOutControlDisplayed());
     }
 
 }

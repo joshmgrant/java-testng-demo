@@ -28,6 +28,7 @@ public abstract class TestBase {
         driver = new RemoteWebDriver(url, caps);
 
         driver.get("http://a.testaddressbook.com");
+
     }
 
     @AfterMethod

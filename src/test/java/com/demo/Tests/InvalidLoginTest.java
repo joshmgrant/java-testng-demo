@@ -1,5 +1,6 @@
 package com.demo.Tests;
 
+import com.demo.pages.LoginPage;
 import org.testng.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,15 +12,19 @@ import java.net.URL;
 
 public class InvalidLoginTest extends TestBase {
 
+    protected LoginPage loginPage;
+
     @Test
-    public void blankCredentials() throws InterruptedException {
-            driver.findElement(By.id("sign-in")).click();
-            Thread.sleep(2000);
-            driver.findElement(By.cssSelector("[data-test='submit']")).click();
+    public void blankCredentials() {
+        loginPage = new LoginPage(driver);
 
-            String expected = "Bad email or password.";
-            String actual = driver.findElement(By.cssSelector("[data-test='notice']")).getText();
+        loginPage.clickSignInButton();
+        loginPage.enterCredentials("", "");
+        loginPage.submitCredentials();
 
-            Assert.assertEquals(expected, actual);
+        String expected = "Bad email or password.";
+        String actual = loginPage.getInvalidLoginMessage();
+
+        Assert.assertEquals(expected, actual);
     }
 }
