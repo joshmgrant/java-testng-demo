@@ -35,6 +35,17 @@ public class WorkflowTest {
             driver.get("http://a.testaddressbook.com");
 
             driver.findElement(By.id("sign-in")).click();
+            Thread.sleep(2000);
+            driver.findElement(By.cssSelector("[data-test='submit']")).click();
+
+            String expected = "Bad email or password.";
+            String actual = driver.findElement(By.cssSelector("[data-test='notice']")).getText();
+
+            Assert.assertEquals(expected, actual);
+
+            Thread.sleep(2000);
+
+            driver.findElement(By.id("sign-in")).click();
 
             Thread.sleep(2000);
 
@@ -43,11 +54,6 @@ public class WorkflowTest {
             driver.findElement(By.cssSelector("[data-test='submit']")).click();
 
             Assert.assertTrue(driver.findElement(By.cssSelector("[data-test='sign-out']")).isDisplayed());
-
-            driver.findElement(By.cssSelector("[data-test='addresses']")).click();
-            Thread.sleep(2000);
-
-            Assert.assertTrue(driver.findElement(By.cssSelector("[data-test='create']")).isDisplayed());
 
         } catch (Exception e){
            System.out.println(e.toString());
