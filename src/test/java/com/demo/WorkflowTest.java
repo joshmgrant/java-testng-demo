@@ -39,7 +39,10 @@ public class WorkflowTest {
             Thread.sleep(2000);
             driver.findElement(By.cssSelector("[data-test='submit']")).click();
 
+            String expected = "Bad email or password.";
+            String actual = driver.findElement(By.cssSelector("[data-test='notice']")).getText();
 
+            Assert.assertEquals(expected, actual);
 
             Thread.sleep(2000);
 
