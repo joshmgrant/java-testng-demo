@@ -7,11 +7,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import java.lang.reflect.Method;
 
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.LocalDateTime;
 
 
 public abstract class TestBase {
@@ -26,7 +25,7 @@ public abstract class TestBase {
         caps.setCapability("version", "65.0");
         caps.setCapability("seleniumVersion", "3.1.0");
         caps.setCapability("name", method.getName());
-        caps.setCapability("build", "AddressBook-" + LocalDateTime.now());
+        caps.setCapability("build", "AddressBook-example");
 
         String sauce_username = System.getenv("SAUCE_USERNAME");
         String sauce_access_key = System.getenv("SAUCE_ACCESS_KEY");
